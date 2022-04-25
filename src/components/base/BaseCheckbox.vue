@@ -12,19 +12,15 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    modelValue: {
-      type: Boolean,
-      default: false,
-    },
+<script setup>
+import { defineProps, defineEmits } from "vue";
+const props = defineProps({
+  modelValue: {
+    type: Boolean,
+    default: false,
   },
-  emits: ["update:modelValue"],
-  methods: {
-    onChange() {
-      this.$emit("update:modelValue", !this.modelValue);
-    },
-  },
-};
+});
+// const nonReactive = toRefs(props, "modelValue");
+const emit = defineEmits(["update:modelValue"]);
+const onChange = () => emit("update:modelValue", !props.modelValue);
 </script>
