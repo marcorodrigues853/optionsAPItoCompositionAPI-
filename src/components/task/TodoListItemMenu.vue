@@ -17,14 +17,18 @@
 <script setup>
 import BaseTextButton from "./../base/BaseTextButton.vue";
 import TodoListItemMenuMove from "./TodoListItemMenuMove.vue";
-// import { REMOVE_TASK } from "./../../store/mutation-types";
-// import { mapMutations } from "vuex";
-
+import { REMOVE_TASK } from "./../../store/mutation-types";
 import { ref, inject } from "vue";
+import { useStore } from "vuex";
+
 const showMenu = ref(false);
 const toogleMenu = () => (showMenu.value = !showMenu.value);
 const task = inject("task");
 const projectId = inject("projectId");
+const store = useStore();
 const taskRemoved = () =>
-  console.log(`it's not implemented yet, ${task.id} and ${projectId}`);
+  store.commit(`project/${REMOVE_TASK}`, {
+    taskId: task.value.id,
+    projectId: projectId.value,
+  });
 </script>
